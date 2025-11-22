@@ -16,7 +16,7 @@ A simple and effective web scraping project that collects quotes, authors, and t
 git clone https://github.com/unaidabdullah-ui/quotes-scraper.git
 cd quotes-scraper
 2️⃣ Install Dependencies
-```
+
 Copy code
 pip install requests beautifulsoup4 lxml
 3️⃣ Run the Script
