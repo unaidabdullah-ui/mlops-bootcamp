@@ -30,12 +30,11 @@ pip install requests beautifulsoup4 lxml
 
 ### 3️⃣ Run the Script
 python scraper.py
----
+
 
 ## 📂 Output
 The scraper will generate:
 quotes_dataset.csv → contains: quote, author, tags
-
 
 
 ## 👨‍💻 Author
