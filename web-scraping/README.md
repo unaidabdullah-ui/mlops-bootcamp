@@ -35,7 +35,8 @@ python scraper.py
 ## 📂 Output
 The scraper will generate:
 quotes_dataset.csv → contains: quote, author, tags
----
+
+
 
 ## 👨‍💻 Author
 Unaid Abdullah
