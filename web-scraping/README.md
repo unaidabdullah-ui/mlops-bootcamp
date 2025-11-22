@@ -39,7 +39,7 @@ quotes_dataset.csv → contains: quote, author, tags
 
 ## 👨‍💻 Author
 Unaid Abdullah
-📧 Email: unaidabdullah@gmail.com
-🔗 GitHub: unaidabdullah-ui
----
 
+📧 Email: unaidabdullah@gmail.com
+
+🔗 GitHub: unaidabdullah-ui
