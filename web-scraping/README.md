@@ -23,21 +23,21 @@ cd quotes-scraper
 
 ---
 
-###2️⃣ Install Dependencies
+### 2️⃣ Install Dependencies
 pip install requests beautifulsoup4 lxml
 
 ---
 
-###3️⃣ Run the Script
+### 3️⃣ Run the Script
 python scraper.py
 ---
 
-##📂 Output
+## 📂 Output
 The scraper will generate:
 quotes_dataset.csv → contains: quote, author, tags
 ---
 
-##👨‍💻 Author
+## 👨‍💻 Author
 Unaid Abdullah
 📧 Email: unaidabdullah@gmail.com
 🔗 GitHub: unaidabdullah-ui
