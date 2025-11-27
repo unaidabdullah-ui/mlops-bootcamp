@@ -13,17 +13,20 @@ This project demonstrates advanced SQL skills used in real-world ML pipelines �
 - ✔️ MLOps-style modular SQL scripts  
 
 ## 📁 Project Structure
+
+```
 sql-mlops-pipeline/
 │
 ├── data/
-│   └── raw_data.csv           # Input dataset
+│   └── raw_data.csv                 # Input dataset
 │
 ├── sql/
-│   ├── 01_create_tables.sql           # Schema creation
-│   ├── 02_cleaning.sql                # Data cleaning steps
-│   ├── 03_feature_engineering.sql     # Feature transformations
-│   ├── 04_views.sql                   # ML-ready views
-│   ├── 05_indexes.sql                 # Index optimization
-│   └── 06_analytics.sql               # Analytics & monitoring
+│   ├── 01_create_tables.sql         # Schema creation
+│   ├── 02_cleaning.sql              # Data cleaning steps
+│   ├── 03_feature_engineering.sql   # Feature transformations
+│   ├── 04_views.sql                 # ML-ready views
+│   ├── 05_indexes.sql               # Index optimization
+│   └── 06_analytics.sql             # Analytics & monitoring
 │
 └── README.md
+```
