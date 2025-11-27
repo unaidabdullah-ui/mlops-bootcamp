@@ -1,0 +1,5 @@
+groups:
+- name: mlapi_rules
+  rules:
+  - record: api_latency
+    expr: prediction_latency
