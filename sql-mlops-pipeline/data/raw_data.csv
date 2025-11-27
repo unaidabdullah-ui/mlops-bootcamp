@@ -1,0 +1,11 @@
+id,name,age,city,income,purchase_amount,purchase_date
+1,Alice,25,Bangalore,55000,1200,2024-01-03
+2,Bob,31,Hyderabad,72000,3000,2024-01-05
+3,Charlie,,Mumbai,65000,800,2024-01-06
+4,David,45,,82000,5000,2024-01-07
+5,Eva,29,Bangalore,58000,1200,2024-01-10
+6,Farhan,35,Hyderabad,Null,2000,2024-01-11
+7,Aisha,28,Delhi,60000,,2024-01-12
+8,John,41,Mumbai,70000,4500,2024-01-14
+9,Meera,33,Delhi,65000,2500,2024-01-15
+10,Rahul,27,Bangalore,Null,1500,2024-01-17
