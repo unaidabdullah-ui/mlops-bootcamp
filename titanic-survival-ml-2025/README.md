@@ -23,7 +23,7 @@ This project demonstrates a modern data science workflow using the Titanic datas
 ## How to Run
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/unaidabdullah-ui/mlops-bootcamp/tree/4ffe250ef4dd4e32e7af967d5a7a330423fe5ef2/titanic-survival-ml-2025
 cd titanic-survival-ml-2025
 pip install -r requirements.txt
 
@@ -35,3 +35,4 @@ python -m src.train_model
 
 # Evaluate saved model
 python -m src.evaluate_model
+
