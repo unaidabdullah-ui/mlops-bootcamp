@@ -33,4 +33,23 @@ dvc repro
 dvc metrics show
 
 ## Folder Structure
-(Include your folder tree)
+```
+dvc-iris-ml-pipeline/
+│
+├── data/
+│   └── raw/
+│       └── iris.csv
+│
+├── src/
+│   ├── prepare.py
+│   ├── train.py
+│   └── evaluate.py
+│
+├── models/
+│
+├── metrics.json
+├── params.yaml
+├── requirements.txt
+└── README.md
+```
+
