@@ -20,13 +20,28 @@ All free on YouTube. Huge thanks to these creators:
 
 ---
 
+## 🧱 Repo Structure
+
+```
+mlops-bootcamp/
+├── 01-python/             # Python basics + file organizer project
+├── 02-linux-shell/        # Bash scripting → ML training & deploy automation
+├── 03-data-handling/      # pandas, SQL, web scraping, visualization
+├── 04-machine-learning/   # scikit-learn pipelines, Titanic, automated EDA
+└── 05-mlops/              # DVC pipelines, FastAPI + Docker + Kubernetes
+```
+
+⭐ **Highlight project:** [`05-mlops/ml-api-docker-kubernetes`](05-mlops/ml-api-docker-kubernetes): a scikit-learn model served with FastAPI, containerized with Docker, deployed on Kubernetes, with Prometheus alert rules.
+
+---
+
 ## 🗺️ Learning Roadmap
 
 ### Stage 1: Python Fundamentals
 | Folder | What's inside |
 |--------|---------------|
-| [`PYHTON_FUNDAMENTALS`](PYHTON_FUNDAMENTALS) | Variables, loops, functions, data structures |
-| [`Organizer-python`](Organizer-python) | Mini project: file organizer script |
+| [`python-basics`](01-python/python-basics) | Variables, loops, functions, data structures |
+| [`file-organizer`](01-python/file-organizer) | Mini project: file organizer script |
 
 **Learned from:** CodeWithHarry, CampusX
 **Free resources:** [Official Python Tutorial](https://docs.python.org/3/tutorial/) · [Kaggle Learn: Python](https://www.kaggle.com/learn/python)
@@ -34,7 +49,7 @@ All free on YouTube. Huge thanks to these creators:
 ### Stage 2: Linux & Shell Scripting
 | Folder | What's inside |
 |--------|---------------|
-| [`shell-scripting`](shell-scripting) | Bash basics → dataset scanning → training automation → deploy scripts |
+| [`02-linux-shell`](02-linux-shell) | Bash basics → dataset scanning → training automation → deploy scripts |
 
 **Learned from:** TrainWithShubham
 **Free resources:** [Linux Journey](https://linuxjourney.com/) · [ShellCheck](https://www.shellcheck.net/) (lint your scripts)
@@ -42,10 +57,10 @@ All free on YouTube. Huge thanks to these creators:
 ### Stage 3: Working With Data
 | Folder | What's inside |
 |--------|---------------|
-| [`machine learning`](machine%20learning) | Loading CSV, JSON and SQL data with pandas |
-| [`sql-mlops-pipeline`](sql-mlops-pipeline) | SQL data cleaning and feature engineering |
-| [`web-scraping`](web-scraping) | Quote scraper with Requests + BeautifulSoup |
-| [`matplotlib_basic`](matplotlib_basic), [`sns_model`](sns_model) | Data visualization with Matplotlib and Seaborn |
+| [`pandas-data-loading`](03-data-handling/pandas-data-loading) | Loading CSV, JSON and SQL data with pandas |
+| [`sql-feature-engineering`](03-data-handling/sql-feature-engineering) | SQL data cleaning and feature engineering |
+| [`web-scraping`](03-data-handling/web-scraping) | Quote scraper with Requests + BeautifulSoup |
+| [`matplotlib-basics`](03-data-handling/matplotlib-basics), [`seaborn-eda`](03-data-handling/seaborn-eda) | Data visualization with Matplotlib and Seaborn |
 
 **Learned from:** CampusX, CodeWithHarry
 **Free resources:** [10 Minutes to pandas](https://pandas.pydata.org/docs/user_guide/10min.html) · [SQLBolt](https://sqlbolt.com/) · [Kaggle Learn: Pandas](https://www.kaggle.com/learn/pandas) · [Seaborn Tutorial](https://seaborn.pydata.org/tutorial.html)
@@ -53,9 +68,9 @@ All free on YouTube. Huge thanks to these creators:
 ### Stage 4: Machine Learning
 | Folder | What's inside |
 |--------|---------------|
-| [`Sicket-learn`](Sicket-learn) | scikit-learn Pipelines and SimpleImputer |
-| [`titanic-survival-ml-2025`](titanic-survival-ml-2025) | End-to-end classification project |
-| [`automated-eda-ml-report`](automated-eda-ml-report) | Automated EDA, training and report generation |
+| [`sklearn-pipelines`](04-machine-learning/sklearn-pipelines) | scikit-learn Pipelines and SimpleImputer |
+| [`titanic-survival`](04-machine-learning/titanic-survival) | End-to-end classification project |
+| [`automated-eda-report`](04-machine-learning/automated-eda-report) | Automated EDA, training and report generation |
 
 **Learned from:** CampusX, Krish Naik
 **Free resources:** [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) · [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course) · [Kaggle Learn: Intro to ML](https://www.kaggle.com/learn/intro-to-machine-learning)
@@ -63,9 +78,9 @@ All free on YouTube. Huge thanks to these creators:
 ### Stage 5: MLOps
 | Folder | What's inside |
 |--------|---------------|
-| [`dvc-iris-ml-pipeline`](dvc-iris-ml-pipeline) | Reproducible pipeline with DVC (prepare → train → evaluate) |
-| [`student-score-dvc`](student-score-dvc) | Data versioning with DVC |
-| [`mlops-project`](mlops-project) | Model served with FastAPI, Dockerized, deployed on Kubernetes with Prometheus alert rules |
+| [`dvc-iris-pipeline`](05-mlops/dvc-iris-pipeline) | Reproducible pipeline with DVC (prepare → train → evaluate) |
+| [`dvc-student-score`](05-mlops/dvc-student-score) | Data versioning with DVC |
+| [`ml-api-docker-kubernetes`](05-mlops/ml-api-docker-kubernetes) | Model served with FastAPI, Dockerized, deployed on Kubernetes with Prometheus alert rules |
 
 **Learned from:** Krish Naik, TrainWithShubham
 **Free resources:** [DataTalksClub MLOps Zoomcamp](https://github.com/DataTalksClub/mlops-zoomcamp) · [Made With ML](https://madewithml.com/) · [DVC Get Started](https://dvc.org/doc/start) · [FastAPI Tutorial](https://fastapi.tiangolo.com/tutorial/) · [Docker Get Started](https://docs.docker.com/get-started/) · [Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) · [GitHub Actions Docs](https://docs.github.com/en/actions)

@@ -15,7 +15,7 @@ This project demonstrates advanced SQL skills used in real-world ML pipelines �
 ## 📁 Project Structure
 
 ```
-sql-mlops-pipeline/
+sql-feature-engineering/
 │
 ├── data/
 │   └── raw_data.csv                 # Input dataset
