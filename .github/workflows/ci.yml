@@ -9,7 +9,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: ShellCheck
         run: find 02-linux-shell -name "*.sh" -print0 | xargs -0 shellcheck -S warning
       - name: Ruff (syntax errors and undefined names)
@@ -18,8 +18,8 @@ jobs:
   dvc-pipelines:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - run: pip install pandas scikit-learn pyyaml
@@ -36,7 +36,7 @@ jobs:
       run:
         working-directory: 05-mlops/ml-api-docker-kubernetes
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build image
         run: docker build -t mlapi .
       - name: Smoke test
