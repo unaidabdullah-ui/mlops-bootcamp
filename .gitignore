@@ -7,3 +7,8 @@ data/
 models/
 *.pkl
 .DS_Store
+
+# Large datasets - download locally (see DATA.md in each folder)
+aug_train.csv
+zomato.csv
+train.json
