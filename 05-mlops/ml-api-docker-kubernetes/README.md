@@ -1,126 +1,74 @@
-# 🚀 ML Model API (MLOps Project)
+# 🚀 ML Model API: FastAPI + Docker + Kubernetes + Prometheus
 
-A production-ready Machine Learning API built using FastAPI, Docker, Kubernetes, and Scikit-learn.  
-This project demonstrates an end-to-end MLOps pipeline — from training to deployment and monitoring.
+A scikit-learn model served as a REST API, containerized with Docker, deployed to Kubernetes with health probes, and monitored with Prometheus.
 
 ---
 
 ## 📌 Features
 
-- FastAPI-based REST API  
-- Machine Learning model (Random Forest)  
-- Model training & serialization (joblib)  
-- Dockerized application  
-- Kubernetes deployment  
-- Basic monitoring (latency tracking + Prometheus rules)  
-- Clean modular project structure  
-- Swagger UI support (/docs)  
-
----
-
-## 🧠 ML Model
-
-- Algorithm: Random Forest Classifier  
-- Dataset: CSV file (data/data.csv)  
-- Model saved as: models/model.pkl  
+- FastAPI REST API with Swagger UI at `/docs`
+- Random Forest classifier trained with scikit-learn, saved with joblib
+- Docker image that trains the model at build time, so it always matches the installed library versions
+- Kubernetes Deployment (2 replicas, readiness/liveness probes, resource limits) + LoadBalancer Service
+- Prometheus metrics at `/metrics`, with a p95 latency recording rule and an alert
 
 ---
 
 ## ⚙️ Tech Stack
 
-- Backend: FastAPI  
-- ML: Scikit-learn, Pandas, NumPy  
-- Model Storage: Joblib  
-- Containerization: Docker  
-- Orchestration: Kubernetes  
-- Monitoring: Prometheus  
-- Versioning (optional): DVC, AWS S3 (boto3)  
+FastAPI · scikit-learn · pandas · joblib · Docker · Kubernetes · Prometheus
 
 ---
 
 ## 📁 Project Structure
 
 ```
-.
-├── data/
-│   └── data.csv
-├── models/
-│   └── model.pkl
+ml-api-docker-kubernetes/
+├── api/main.py          # FastAPI app: /, /health, /predict, /metrics
 ├── src/
+│   ├── train.py         # trains the model → models/model.pkl
+│   ├── predict.py       # predict from Python
 │   └── utils.py
-├── train.py
-├── predict.py
-├── main.py
+├── data/data.csv        # training data (feature1, feature2, feature3, label)
+├── models/model.pkl
+├── k8s/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── prom-rules.yaml  # Prometheus recording rule + alert
 ├── Dockerfile
-├── deployment.yaml
-├── service.yaml
-├── prom-rules.yaml
-├── requirements.txt
+└── requirements.txt
 ```
 
 ---
 
-## 🏗️ Training the Model
-
-Run the training script:
+## ▶️ Run Locally
 
 ```bash
-python train.py
+pip install -r requirements.txt
+python src/train.py
+uvicorn api.main:app --reload
 ```
 
----
-
-## 🚀 Running the API Locally
-
-```bash
-uvicorn main:app --reload
-```
-
-Open in browser:
-
-- http://127.0.0.1:8000  
-- http://127.0.0.1:8000/docs  
+Open http://127.0.0.1:8000/docs
 
 ---
 
 ## 🔮 API Endpoints
 
-### GET /
-
-```
-{
-  "message": "Welcome to the ML Model API"
-}
-```
-
-### POST /predict
-
-Request:
-
-```
-[3.5, 1.2, 0.8]
-```
-
-Response:
-
-```
-{
-  "prediction": 1,
-  "latency": 0.0021
-}
-```
-
----
-
-## 🧪 Prediction Script
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/` | Welcome message |
+| GET | `/health` | Health check (used by Kubernetes probes) |
+| POST | `/predict` | Body: `[3.5, 1.2, 0.8]` → `{"prediction": 1}` |
+| GET | `/metrics` | Prometheus metrics |
 
 ```bash
-python predict.py
+curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -d "[3.5, 1.2, 0.8]"
 ```
 
 ---
 
-## 🐳 Docker Setup
+## 🐳 Docker
 
 ```bash
 docker build -t mlapi .
@@ -129,54 +77,31 @@ docker run -p 8000:8000 mlapi
 
 ---
 
-## ☸️ Kubernetes Deployment
+## ☸️ Kubernetes
 
 ```bash
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl get pods -l app=mlapi
 ```
+
+Using a local cluster (minikube/kind)? Build the image there and change `image:` in `deployment.yaml`.
 
 ---
 
 ## 📊 Monitoring
 
-Metric:
+| Metric | Type | Meaning |
+|--------|------|---------|
+| `predictions_total` | Counter | Predictions served |
+| `prediction_latency_seconds` | Histogram | Time spent in `model.predict` |
 
-```
-prediction_latency
-```
-
----
-
-## 📜 Logging
-
-Logs stored in:
-
-```
-logs/app.log
-```
+Pods are annotated for Prometheus scraping. `k8s/prom-rules.yaml` records p95 latency and fires `MLApiHighLatency` when it stays above 500 ms for 5 minutes.
 
 ---
 
-## 💡 Future Improvements
+## 💡 Next Steps
 
-- CI/CD pipeline (GitHub Actions / Jenkins)  
-- Model versioning with MLflow  
-- Grafana dashboards  
-- Auto-retraining pipeline  
-- Authentication & rate limiting  
-
----
-
-## 👨‍💻 Author
-
-Your Name  
-
-GitHub: https://github.com/unaidabdullah-ui 
-LinkedIn: https://www.linkedin.com/in/unaid-abdullah/  
-
----
-
-## ⭐ Give it a Star
-
-If you found this helpful, give it a star on GitHub!
+- Model versioning with MLflow
+- Grafana dashboard for the metrics above
+- Auto-retraining pipeline

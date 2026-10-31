@@ -1,25 +1,29 @@
 from fastapi import FastAPI
+from fastapi.responses import Response
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 import joblib
-import numpy as np
-import time
 
 model = joblib.load("models/model.pkl")
 app = FastAPI()
+
+PREDICTIONS = Counter("predictions_total", "Number of predictions served")
+LATENCY = Histogram("prediction_latency_seconds", "Time spent on model.predict")
 
 @app.get("/")
 def root():
     return {"message": "Welcome to the ML Model API"}
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.post("/predict")
-def predict(features:list):
-    start = time.time()
+def predict(features: list[float]):
+    with LATENCY.time():
+        prediction = model.predict([features])[0]
+    PREDICTIONS.inc()
+    return {"prediction": int(prediction)}
 
-    prediction = model.predict([features])[0]
-    
-    latency = time.time() - start
-    with open("metrics.txt", "w") as f:
-        f.write(f"prediction_latency {latency}")
-    
-    return {"prediction": int(prediction), "latency": latency}
-
-          
+@app.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)

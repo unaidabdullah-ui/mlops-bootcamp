@@ -1,5 +1,12 @@
 groups:
 - name: mlapi_rules
   rules:
-  - record: api_latency
-    expr: prediction_latency
+  - record: mlapi:prediction_latency_seconds:p95
+    expr: histogram_quantile(0.95, sum(rate(prediction_latency_seconds_bucket[5m])) by (le))
+  - alert: MLApiHighLatency
+    expr: mlapi:prediction_latency_seconds:p95 > 0.5
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "ML API p95 prediction latency is above 500ms"

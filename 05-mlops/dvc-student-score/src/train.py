@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+import os
 import pickle
 import yaml
 
@@ -20,5 +21,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 model = LinearRegression()
 model.fit(X_train, y_train)
 
+os.makedirs(os.path.dirname(params["model_output"]), exist_ok=True)
 with open(params["model_output"], "wb") as f:
     pickle.dump(model, f)

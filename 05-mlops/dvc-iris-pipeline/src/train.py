@@ -1,5 +1,6 @@
 import pandas as pd
 import yaml
+import os
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 
@@ -18,6 +19,7 @@ model = RandomForestClassifier(
 
 model.fit(X, y)
 
+os.makedirs("models", exist_ok=True)
 with open("models/model.pkl", "wb") as f:
     pickle.dump(model, f)
 

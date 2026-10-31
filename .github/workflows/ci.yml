@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ShellCheck
+        run: find 02-linux-shell -name "*.sh" -print0 | xargs -0 shellcheck -S warning
+      - name: Ruff (syntax errors and undefined names)
+        run: pipx run ruff check --select E9,F63,F7,F82 --extend-exclude "*.ipynb" .
+
+  dvc-pipelines:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas scikit-learn pyyaml
+      - name: Iris pipeline
+        working-directory: 05-mlops/dvc-iris-pipeline
+        run: python src/prepare.py && python src/train.py && python src/evaluate.py
+      - name: Student score pipeline
+        working-directory: 05-mlops/dvc-student-score
+        run: python src/load_data.py && python src/train.py && python src/evaluate.py
+
+  ml-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 05-mlops/ml-api-docker-kubernetes
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t mlapi .
+      - name: Smoke test
+        run: |
+          docker run -d -p 8000:8000 --name mlapi mlapi
+          for i in $(seq 1 30); do curl -sf localhost:8000/health && break; sleep 1; done
+          curl -sf -X POST localhost:8000/predict -H "Content-Type: application/json" -d "[3.5, 1.2, 0.8]"
+          curl -sf localhost:8000/metrics | grep predictions_total

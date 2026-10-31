@@ -9,7 +9,7 @@ def train_models(df, target):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    problem_type = "regression" if y.dtype != "object" else "classification"
+    problem_type = "classification" if y.dtype == "object" or y.nunique() <= 10 else "regression"
 
     results = {}
 
@@ -22,7 +22,7 @@ def train_models(df, target):
 
     else:
         models = {
-            "LogisticRegression": LogisticRegression(),
+            "LogisticRegression": LogisticRegression(max_iter=1000),
             "RandomForestClassifier": RandomForestClassifier()
         }
         metric = accuracy_score
